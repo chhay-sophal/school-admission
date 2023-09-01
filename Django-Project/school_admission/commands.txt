@@ -1,0 +1,21 @@
+-ACTIVATE + RUNSERVER:
+cd..
+enviroment\scripts\activate
+cd school_admission
+python manage.py runserver
+
+pip freeze > requirements.txt
+pip freeze | findstr /i django > installed.txt
+
+
+-CREATE DATABASE + MIGRATE:
+CREATE DATABASE DB_SchoolAdmission; (MySQL Query)
+python manage.py makemigrations
+python manage.py migrate
+
+
+-CREATE USER:
+python manage.py createsuperuser
+
+
+python manage.py startapp (app_name)

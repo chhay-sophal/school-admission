@@ -1,0 +1,11 @@
+button {
+    background-color: var(--primary);
+}
+
+#search-box {
+    padding: 5px 5px;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.562);
+    box-shadow: none;
+    border-radius: 5px;
+}

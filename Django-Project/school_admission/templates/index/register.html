@@ -1,0 +1,339 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITY Institute - Register Form</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo/infinity-logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo/infinity-logo.png' %}" rel="apple-touch-icon">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+
+<body>
+    <div class="container mb-4">
+        <!-- Logo -->
+        <div class="logo">
+            <div class="row mb-3">
+                <div class="col-md-2 col-sm-4 mx-auto mt-4">
+                    <img class="img-fluid" src="{% static 'img/logo/infinity-logo.png' %}" alt="">
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-6 mx-auto text-center">
+                    <h3 style="color: #37517e">INFINITY Institute</h3>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="text-uppercase text-center">application form admission</h2>
+        <form action="register_process.php" method="POST" enctype="multipart/form-data">
+            <div class="col-md-12 mb-2">
+                <hr style="width: 100%;">
+            </div>
+            <h3 class="mb-3 title">Personal Information</h4>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="col-md-12 mb-2" for="photo">Your Photo (4x6)</label>
+                            <div class="row">
+                                <input class="form-control mb-2" type="file" name="photo" id="photo" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="mb-2" for="">Name in Khmer*</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-control mb-2 kh" type="text" name="fname_kh" id="fname_kh" placeholder="នាមត្រកូល" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control mb-2 kh" type="text" name="lname_kh" id="lname_kh" placeholder="នាមខ្លួន" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="mb-2" for="">Name in English*</label>
+                                <div class="col-md-6">
+                                    <input class="form-control mb-2" type="text" name="fname" id="fname" placeholder="First Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control mb-2" type="text" name="lname" id="lname" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label" for="">Sex*</label>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {% for i in sex %}
+                                    <div class="form-check form-check-inline col-md-6">
+                                        <input class="form-check-input" type="radio" id="sex{{i.id}}" name="sex" value="{{i.title}}" required>
+                                        <label class="form-check-label" for="sex{{i.id}}">{{i.title}}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="mb-2" for="">Place of Birth*</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="village" id="village" placeholder="Village" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="commune" id="commune" placeholder="Commune" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="district" id="district" placeholder="District" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="province" id="province" placeholder="Province" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="mb-2" for="birthday">Date of Birth*</label>
+                            <input class="form-control mb-2" type="date" name="birthday" id="birthday" placeholder="YYYY-mm-dd" required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="mb-2" for="">Current Address*</label>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="village_cur" id="village_cur" placeholder="Village" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="commune_cur" id="commune_cur" placeholder="Commune" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="district_cur" id="district_cur" placeholder="District" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control mb-2" type="text" name="province_cur" id="province_cur" placeholder="Province" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <label class="mb-2" for="">Nationality*</label>
+                            <input class="form-control" type="text" name="nationality" id="nationality" placeholder="Nationality" required />
+                        </div>
+                        <div class="col-md-4">
+                            <label class="mb-2" for="">Father*</label>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input class="form-control" type="text" name="father_name" id="father_name" placeholder="Name" required />
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input class="form-control" type="tel" name="father_tel" id="father_tel" placeholder="Tel" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="mb-2" for="">Mother*</label>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <input class="form-control" type="text" name="mother_name" id="mother_name" placeholder="Name" required />
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input class="form-control" type="tel" name="mother_tel" id="mother_tel" placeholder="Tel" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row mb-2">
+                        <div class="col-md-4 mb-2">
+                            <label class="mb-2" for="">Marital Status*</label>
+                            <div class="row">
+                                {% for i in marital %}
+                                <div class="form-check form-check-inline col-md-4">
+                                    <input class="form-check-input mb-2" type="radio" name="marital" id="inlineRadio{{ i.id }}" value="{{ i.id }}" required>
+                                    <label class="form-check-label" for="inlineRadio{{ i.id }}">{{ i.title }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-8 mb-2">
+                            <div class="row">
+                                <label class="mb-2" for="">Emergency Contact*</label>
+                                <div class="col-md-3 mb-2">
+                                    <input class="form-control" type="text" name="name_emer" id="name_emer" placeholder="Full Name" required />
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <select class="form-select" type="text" name="relationship_emer" id="relationship_emer">
+                                        <option value="">---</option>
+                                        {% for i in relation %}
+                                        <option value="{{i.id}}">{{i.title}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input class="form-control" type="text" name="tel_emer" id="tel_emer" placeholder="0123456789" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <label class="form-label" for="">Apply for*</label>
+                            <select class="form-select" type="text" name="level" id="level" required>
+                                <option value="">---</option>
+                                {% for i in level %}
+                                <option value="{{ i.id }}">{{ i.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="">Majoring in*</label>
+                            <select class="form-select" type="text" name="major" id="major" required>
+                                <option value="">---</option>
+                                {% if major %}
+                                {% for i in major %}
+                                <option value="{{ i.id }}">{{ i.title }}</option>
+                                {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label" for="">Shift</label>
+                            <select class="form-select" type="text" name="shift" id="shift" required>
+                                <option value="">---</option>
+                                {% for i in shift %}
+                                <option value="{{i.id}}">{{i.title}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <label class="mb-2" for="tel">Phone*</label>
+                            <input class="form-control" type="tel" name="tel" id="tel" placeholder="Tel" required />
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="mb-2" for="student_id">Student ID*</label>
+                            <input class="form-control mb-2" type="file" name="student_id" id="student_id" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="mb-2" for="kh_id">Khmer ID or Birth certificate*</label>
+                            <input class="form-control mb-2" type="file" name="kh_id" id="kh_id" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <label class="mb-2" for="email">Email*</label>
+                            <input class="form-control" type="email" name="email" id="email" placeholder="Email" required />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-2">
+                    <hr style="width: 100%;">
+                </div>
+
+                <div class="col-md-12 mb-2">
+                    <div class="row mb-2">
+                        <h3 class="mb-3 title">Payment Method</h4>
+                            <div class="col-md-4">
+                                <select class="form-select" type="text" name="payment" id="payment" required>
+                                    <option value="">---</option>
+                                    {% for i in payment %}
+                                    <option value="{{i.id}}">{{i.title}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mb-2">
+                    <hr style="width: 100%;">
+                </div>
+
+                <div class="col-md-12 mb-2">
+                    <div class="row mb-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="terms" required />
+                            <label class="form-check-label" for="terms">Agree to terms and conditions</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="declare" required />
+                            <label class="form-check-label" for="declare">I hereby declare that information furnished above is true and correct in every respect and in case any information is found incorrect even partially the candidature shall be liable to be rejected.</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 d-flex flex-column justify-content-center mb-2 mt-4">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12 mx-auto">
+                            <button type="submit" class="btn form-control p-2">Submit Form <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+
+    </div>
+    </div>
+
+    <div class="constraint">
+        <button id="info" class="round-button">
+            <div class="round-button-circle">
+                <span class="round-button"><i class="fa-solid fa-exclamation"></i></span>
+            </div>
+        </button>
+    </div>
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/302987efd2.js" crossorigin="anonymous"></script>
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <!-- <script src="{% static 'js/register.js' %}"></script> -->
+</body>
+
+</html>

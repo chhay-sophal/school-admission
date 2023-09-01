@@ -1,0 +1,439 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INFINITY Institute - Register Form</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'img/logo/infinity-logo.png' %}" rel="icon">
+    <link href="{% static 'img/logo/infinity-logo.png' %}" rel="apple-touch-icon">
+
+    <link rel="stylesheet" href="{% static 'css/register-multi.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<body>
+    <div class="container">
+        <header>Admission Form</header>
+        <?php
+        include_once('include/connection.php');
+
+        // Query to select data from tblExpired
+        $sql = "SELECT * FROM tblExpired WHERE Year = YEAR(NOW())";
+
+        // Execute the query
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $expiredDate = $row['ExpiredDate'];
+            }
+        }
+        $expiration_timestamp = strtotime($expiredDate);
+        $current_timestamp = time();
+
+        if ($current_timestamp > $expiration_timestamp) {
+            header("Location: http://localhost:8080/application%20form/expiredPage.php");
+            exit;
+        }
+
+        $steps_array = [
+            ['title' => 'Info', 'number' => '1'],
+            ['title' => 'Contact', 'number' => '2'],
+            ['title' => 'Bio', 'number' => '3'],
+            ['title' => 'Family', 'number' => '4'],
+            ['title' => 'Program', 'number' => '5'],
+            ['title' => 'Doc', 'number' => '6'],
+            ['title' => 'Submit', 'number' => '7']
+        ];
+
+        // Output the HTML code for the progress bar
+        echo '<div class="progress-bar">';
+        foreach ($steps_array as $step) {
+            echo '<div class="step">';
+            echo '<p>' . $step['title'] . '</p>';
+            echo '<div class="bullet"><span>' . $step['number'] . '</span></div>';
+            echo '<div class="check fas fa-check"></div>';
+            echo '</div>';
+        }
+        echo '</div>';
+        ?>
+
+        <!--  -->
+        <div class="form-outer">
+            <form action="forms/register_process.php" method="POST" enctype="multipart/form-data">
+
+                <!--  -->
+                <div class="page slide-page">
+                    <div class="title">Personal Information:</div>
+                    <div class="avatar-upload">
+                        <div class="avatar-preview">
+                            <label for="imageUpload"></label>
+                            <img class="profile-user-img img-responsive img-circle" id="imagePreview" src="{% static 'img/Profile/none.png' %}" alt="" />
+                        </div>
+                        <div class="avatar-edit">
+                            <input type='file' name="imageUpload" id="imageUpload" accept=".png, .jpg, .jpeg" required />
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="label">Name in Khmer*</div>
+                        <input class="kh" type="text" name="fname_kh" id="fname_kh" placeholder="នាមត្រកូល" required />
+                        <input class="kh" type="text" name="lname_kh" id="lname_kh" placeholder="នាមខ្លួន" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Name in English*</div>
+                        <input class="" type="text" name="fname_en" id="fname_en" placeholder="First Name" required />
+                        <input class="" type="text" name="lname_en" id="lname_en" placeholder="Last Name" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Gender</div>
+                        <select id="gender" name="gender" required>
+                            <option value="">---</option>
+                            <?php
+                            // Query to select data from tblMarried
+                            $sql = "SELECT * FROM tblSex";
+
+                            // Execute the query
+                            $result = mysqli_query($conn, $sql);
+
+                            // Display the results
+                            if (mysqli_num_rows($result) > 0) {
+                                $i = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row["ID"] . '">' . $row["Title"] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <button class="firstNext next">Next</button>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="page">
+                    <div class="title">Contact:</div>
+                    <div class="field">
+                        <div class="label">Phone Number</div>
+                        <input type="tel" name="tel" id="tel" placeholder="0123456789" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Email</div>
+                        <input type="email" name="email" id="email" placeholder="example@gmail.com" required />
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-1 prev">Previous</button>
+                        <button class="next-1 next">Next</button>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="page">
+                    <div class="title">Biographical Information:</div>
+                    <div class="field">
+                        <div class="label">Marital Status</div>
+                        <select name="marital_status" id="marital_status" required>
+                            <option value="">---</option>
+                            <?php
+                            // Query to select data from tblMarried
+                            $sql = "SELECT * FROM tblMarried";
+
+                            // Execute the query
+                            $result = mysqli_query($conn, $sql);
+
+                            // Display the results
+                            if (mysqli_num_rows($result) > 0) {
+                                $i = 1;
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row["ID"] . '">' . $row["Title"] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <div class="label">Date of Birth</div>
+                        <input class="form-control mb-2" type="date" name="birthday" id="birthday" placeholder="YYYY-mm-dd" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Nationality</div>
+                        <input class="form-control" type="text" name="nationality" id="nationality" placeholder="Nationality" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Place of Birth</div>
+                        <input class="form-control mb-2" type="text" name="village" id="village" placeholder="Village" required />
+                        <input class="form-control mb-2" type="text" name="commune" id="commune" placeholder="Commune" required />
+                        <input class="form-control mb-2" type="text" name="district" id="district" placeholder="District" required />
+                        <input class="form-control mb-2" type="text" name="province" id="province" placeholder="Province" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Current Address</div>
+                        <input class="form-control mb-2" type="text" name="village_cur" id="village_cur" placeholder="Village" required />
+                        <input class="form-control mb-2" type="text" name="commune_cur" id="commune_cur" placeholder="Commune" required />
+                        <input class="form-control mb-2" type="text" name="district_cur" id="district_cur" placeholder="District" required />
+                        <input class="form-control mb-2" type="text" name="province_cur" id="province_cur" placeholder="Province" required />
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-1 prev">Previous</button>
+                        <button class="next-1 next">Next</button>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="page">
+                    <div class="title">Family and Emergency Contacts:</div>
+                    <div class="field">
+                        <div class="label">Father</div>
+                        <input class="form-control" type="text" name="father_name" id="father_name" placeholder="Full Name" required />
+                        <input class="form-control" type="tel" name="father_tel" id="father_tel" placeholder="0123456789" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Mother</div>
+                        <input class="form-control" type="text" name="mother_name" id="mother_name" placeholder="Full Name" required />
+                        <input class="form-control" type="tel" name="mother_tel" id="mother_tel" placeholder="0123456789" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Emergency Contact*</div>
+                        <input class="form-control" type="text" name="name_emer" id="name_emer" placeholder="Full Name" required />
+                        <select name="relationship_emer" id="relationship_emer" required>
+                            <option value="">---</option>
+                            <?php
+                            // Query to select data from tblRelationship
+                            $sql = "SELECT * FROM tblRelationship";
+
+                            // Execute the query
+                            $result = mysqli_query($conn, $sql);
+
+                            // Display the results
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row["ID"] . '">' . $row["Title"] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                        <input class="form-control" type="tel" name="tel_emer" id="tel_emer" placeholder="0123456789" required />
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-2 prev">Previous</button>
+                        <button class="next-2 next">Next</button>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="page">
+                    <div class="title">Program Application:</div>
+                    <div class="field">
+                        <div class="label">Degree Level</div>
+                        <select class="form-select" name="level" id="level" required>
+                            <option value="">---</option>
+                            <?php
+                            // Query to select data from tblLevel
+                            $sql = "SELECT * FROM tblLevel";
+                            // Execute the query
+                            $result = mysqli_query($conn, $sql);
+                            // Display the results
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row["ID"] . '">' . $row["Title"] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <div class="label">Major</div>
+                        <select class="form-select" name="major" id="major" required>
+                            <option value="">---</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <div class="label">Shift</div>
+                        <select class="form-select" type="text" name="shift" id="shift" required>
+                            <option value="">---</option>
+                            <?php
+                            // Query to select data from tblShift
+                            $sql = "SELECT * FROM tblShift";
+
+                            // Execute the query
+                            $result = mysqli_query($conn, $sql);
+
+                            // Display the results
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row["ID"] . '">' . $row["Title"] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <div class="label">Payment Method</div>
+                        <select class="form-select" type="text" name="payment" id="payment" required>
+                            <option value="">---</option>
+                            <?php
+                            // Query to select data from tblPayment
+                            $sql = "SELECT * FROM tblPayment";
+
+                            // Execute the query
+                            $result = mysqli_query($conn, $sql);
+
+                            // Display the results
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo '<option value="' . $row["ID"] . '">' . $row["Title"] . '</option>';
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-3 prev">Previous</button>
+                        <button class="next-3 next">Next</button>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="page">
+                    <div class="title">Document Uploads:</div>
+                    <div class="field">
+                        <div class="label">Diploma Certificate*</div>
+                        <input type="file" name="diploma" id="diploma" class="file-select-input" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Student ID*</div>
+                        <input class="form-control mb-2" type="file" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx" name="student_id" id="student_id" required />
+                    </div>
+                    <div class="field">
+                        <div class="label">Khmer ID or Birth Certificate</div>
+                        <input class="form-control mb-2" type="file" accept=".png, .jpg, .jpeg, .pdf, .doc, .docx" name="kh_id" id="kh_id" required />
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-4 prev">Previous</button>
+                        <button class="next-4 next">Next</button>
+                    </div>
+                </div>
+
+                <!--  -->
+                <div class="page">
+                    <div class="title">Terms and Declaration:</div>
+                    <div class="field">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="terms" required />
+                            <label class="form-check-label" for="terms">Agree to terms and conditions</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="declare" required />
+                            <label class="form-check-label" for="declare">I hereby declare that information furnished above is true and correct in every respect and in case any information is found incorrect even partially the candidature shall be liable to be rejected.</label>
+                        </div>
+                    </div>
+                    <div class="field btns">
+                        <button class="prev-5 prev">Previous</button>
+                        <button class="submit" id="btnSubmitReg">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+
+    <div class="constraint">
+        <button id="info" class="round-button">
+            <div class="round-button-circle">
+                <span class="round-button"><i class="fa-solid fa-exclamation"></i></span>
+            </div>
+        </button>
+    </div>
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/302987efd2.js" crossorigin="anonymous"></script>
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{% static 'js/register-multi.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            // Listen for changes to the degree level select box
+            $('#level').on('change', function() {
+                if ($('#level').val() != "") {
+                    // Get the selected degree level ID
+                    var levelId = $('#level').val();
+                    // Construct the URL for the AJAX request
+                    var url = 'forms/get-majors.php?level_id=' + levelId;
+                    // Send an AJAX request to get the majors for the selected degree level
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function(response) {
+                            // Clear the current options from the major select box
+                            $('#major').empty();
+                            // Add the new options to the major select box
+                            for (var i = 0; i < response.length; i++) {
+                                var option = $('<option>');
+                                option.attr('value', response[i].ID);
+                                option.text(response[i].Major);
+                                $('#major').append(option);
+                            }
+                        }
+                    });
+                } else {
+                    // Clear the options from the major select box
+                    $('#major').empty();
+                    $('#major').append('<option value="">---</option>');
+                }
+            });
+
+            function showAlert() {
+                Swal.fire({
+                    icon: "info",
+                    title: "IMPORTANT",
+                    html: "<div class='text-start'>" +
+                        "<h5>Associate Degree:</h5>" +
+                        "<ul><li>Have a high school certificate or equivalent</li></ul>" +
+                        "<h5>Bachelor Degree:</h5>" +
+                        "<ul><li>Have a high school diploma or equivalent</li><li>Pass The INFINITY Institute's Undergraduate Entrance Examination</li></ul>" +
+                        "<h5>Master Degree:</h5>" +
+                        "<ul><li>Have a Bachelor's degree or an equivalent</li><li>Pass The INFINITY Institute's Graduate Entrance Examination, and also</li><li>Pass The University's English Proficiency Test</li></ul>" +
+                        "</div>",
+                    confirmButtonText: 'Next &nbsp;&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i>',
+                    confirmButtonColor: "var(--primary)",
+                    footer: "<h5>Admissions Requirements</h5>",
+                    allowEscapeKey: true,
+                    allowOutsideClick: false,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: "Attention!",
+                            icon: "warning",
+                            html: "<b>Khmer Language</b> allow only in Khmer Name(First Name, Last Name) only, or your Registration Admission will be decline.",
+                            confirmButtonText: 'Understand',
+                            confirmButtonColor: "var(--primary)",
+                        });
+                    }
+                });
+            }
+
+            showAlert();
+
+            $('#info').on('click', function() {
+                showAlert();
+            })
+        });
+    </script>
+</body>
+
+</html>

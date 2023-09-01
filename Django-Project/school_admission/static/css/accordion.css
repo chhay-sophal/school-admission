@@ -1,0 +1,175 @@
+@font-face {
+    font-family: Poppins;
+    src: url('/static/fonts/Poppins.ttf');
+}
+
+@font-face {
+    font-family: Krasar;
+    src: url('/static/fonts/Krasar.ttf');
+}
+
+:root {
+    --primary-op: #0187906c;
+    --primary: #018690;
+    --dark: #006b73;
+    --white: #fff;
+    --gold: rgb(255, 217, 0);
+}
+
+* {
+    font-family: Poppins;
+}
+
+.site-body {
+    align-items: center;
+    width: 95%;
+    margin: 0 auto;
+}
+
+.accordion {
+    margin: 20px 0;
+}
+
+.accordion-item {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-op);
+    color: var(--white);
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.accordion-header:hover {
+    background-color: var(--primary);
+}
+
+.accordion-arrow {
+    display: inline-block;
+    margin-left: 5px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #666 transparent transparent transparent;
+    transition: transform 0.2s ease-in-out;
+}
+
+.accordion-header.active .accordion-arrow {
+    transform: rotate(-360deg);
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #666 transparent;
+}
+
+.accordion-content {
+    background-color: #fff;
+    display: none;
+    overflow: hidden;
+    padding: 10px;
+}
+
+#comment table,
+#subscribe table {
+    border-collapse: collapse;
+    width: 95%;
+    margin: 20px 0;
+    font-size: 14px;
+    color: #333;
+    margin: 0 auto;
+}
+
+th {
+    color: #ffffff;
+    background-color: #018690;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle;
+}
+
+tr:hover {
+    cursor: pointer;
+    background-color: #f5f5f5;
+}
+
+td:first-child {
+    width: 50px;
+}
+
+td:last-child {
+    text-align: left;
+}
+
+i.fa-solid.fa-eye-slash,
+i.fa-regular.fa-eye {
+    margin-right: 5px;
+    color: #999;
+}
+
+.profile {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
+}
+
+.profile img {
+    margin-right: 10px;
+    width: 40px;
+    vertical-align: middle;
+}
+
+.comment {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+span.rounded-circle {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+/* List styles */
+ul {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 10px;
+}

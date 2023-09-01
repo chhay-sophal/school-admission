@@ -1,0 +1,83 @@
+@font-face {
+    font-family: Poppins;
+    src: url('/static/fonts/Poppins.ttf');
+}
+
+@font-face {
+    font-family: Krasar;
+    src: url('/static/fonts/Krasar.ttf');
+}
+
+:root{
+    --primary: #018690;
+    --dark: #006b73;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    box-shadow: none !important;
+}
+
+body {
+    font-family: Poppins;
+    background-color: #fafafa;
+}
+
+.kh {
+    font-family: Krasar;
+}
+
+.title {
+    color: #fff;
+    background: #37517e;
+    background: repeating-linear-gradient(to right, var(--primary) 0%, #fafafa 100%);
+    padding: 5px;
+}
+
+button[type=submit]{
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.info-icon:hover {
+    border: 2px solid red !important;
+}
+
+.constraint {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+.constraint button {
+    font-size: 2rem;
+    margin: 0 20px 15px 0;
+    outline: none;
+    background: none;
+    border: 0;
+    width: 60px;
+    height: 60px;
+}
+.round-button {
+    width: 60px;
+    height: 60px;
+}
+.round-button-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 5px solid #cfdcec;
+    overflow: hidden;
+    background: #018690;
+    box-shadow: 0 0 3px gray;
+    transition: .1s ease-in-out;
+}
+.round-button-circle:hover {
+    background: #006a71;
+}
+.round-button a,
+.round-button span {
+    text-align: center;
+    color: #e2eaf3;
+    text-decoration: none;
+}

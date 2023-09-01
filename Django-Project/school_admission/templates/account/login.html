@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="shortcut icon" href="{% static 'img/logo/infinity-logo.png' %}" type="image/x-icon">
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/302987efd2.js" crossorigin="anonymous"></script>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+    <!-- Background Effect -->
+    <canvas id="neonSmoke"></canvas>
+
+    <!-- Container -->
+    <div class="login-container position-relative w-75">
+        <div class="banner">
+            <img class="img-fluid" src="https://img.freepik.com/premium-vector/business-data-analysis-management-tools-intelligence-enterprise-strategy-development-datadriven_566886-1952.jpg" data-tilt data-tilt-scale="1.1" alt="">
+        </div>
+        <div class="forms text-center">
+            <h2 class="fw-bolder mb-5">INFINITY Institute</h2>
+            <div class="container w-75">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="form-floating mb-3">
+                        {{ field }}
+                        <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                    </div>
+                    {% endfor %}
+                    {% if messages %}
+                    <div class="alert alert-info">
+                        {% for message in messages %}
+                        {{ message }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <button type="submit" id="btnSubmit" class="btn p-3 form-control mt-4" type="button">Login</button>
+                </form>
+                <div class="footer text-center mt-3">
+                    <a class="text-decoration-none" href="https://t.me/phearak2003" target="_blank" onclick="window.open('https://t.me/phearak2003','Pho Phearak','width=600,height=400')"><small>Contact Admin</small></a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright position-absolute bottom-0 start-50 mb-4 text-muted translate-middle">
+            <p class="m-0"><small>©Copyright {{current_year}} {{ school_info }}</small></p>
+        </div>
+    </div>
+
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+
+    <!-- Vanilla JS -->
+    <script type="text/javascript" src="{% static 'js/vanilla-tilt.js' %}"></script>
+
+    <!-- Script -->
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="{% static 'js/balls.js' %}"></script>
+</body>
+
+</html>

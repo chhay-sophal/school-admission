@@ -1,0 +1,77 @@
+@font-face {
+    font-family: Poppins;
+    src: url('/static/fonts/Poppins.ttf');
+}
+
+@font-face {
+    font-family: Krasar;
+    src: url('/static/fonts/Krasar.ttf');
+}
+
+:root{
+    --primary: #018690;
+    --dark: #006b73;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    box-shadow: none !important;
+}
+
+body {
+    user-select: none;
+    background-color: #fafafa;
+    font-family: Poppins;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    display: block;
+    position: absolute;
+}
+
+.login-container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 650px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 0 #00000023 !important;
+}
+
+.banner {
+    overflow: hidden;
+    width: 50%;
+}
+
+.forms {
+    overflow: hidden;
+    width: 50%;
+}
+
+button[type="submit"] {
+    color: var(--white);
+    background-color: var(--dark);
+}
+
+button[type="submit"]:hover{
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+@media screen and (max-width: 1000px) {
+    .banner{
+        display: none;
+    }
+}

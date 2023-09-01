@@ -1,0 +1,13 @@
+#createAvatar {
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+#createProfile {
+    display: none;
+}
