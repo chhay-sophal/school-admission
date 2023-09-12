@@ -1,0 +1,53 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contents %}
+<div class="h-screen flex-grow-1 overflow-y-lg-auto section">
+    <!-- Header -->
+    <header class="bg-surface-primary border-bottom pt-6 sticky-top shadow-sm p-3 mb-5 bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="mb-npx">
+                <div class="row align-items-center">
+                    <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                        <!-- Title -->
+                        <h1 class="h2 mb-0 ls-tight">{{title}}</h1>
+                    </div>
+                    <!-- Actions -->
+                    <div class="col-sm-6 col-12 text-sm-end">
+                        <div class="mx-n1">
+                            <a href="{% url 'users' %}" class="btn d-inline-flex btn-sm btn-primary mx-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <span class=" pe-2">
+                                    <i class="bi bi-x"></i>
+                                </span>
+                                <span>Back</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav -->
+                <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                    <li class="nav-item">
+                        <a href="#tab1" class="nav-link nav-link-tabs active">Add User</a>
+                    </li>
+                </ul>
+            </div>
+    </header>
+    <div class="tab-content">
+        <div id="tab1" class="tab-pane active">
+            <div class="row">
+                <div class="col-6 mx-auto my-5">
+                    <h2>Create Profile</h2>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ profile_form|crispy }}
+                        {{ user_form|crispy }}
+                        <button type="submit" class="btn btn-primary form-control">Create User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents%}

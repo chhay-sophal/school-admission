@@ -1,5 +1,5 @@
 from django.db import models
-from django import forms
+from django.utils import timezone
 
 class Ratings(models.Model):
     rating = models.IntegerField()
@@ -148,7 +148,7 @@ class TuitionFee(models.Model):
 
 
 class Status(models.Model):
-    title = models.CharField(max_length=10)
+    title = models.CharField(max_length=20)
 
     def __str__(self):
         return self.title
@@ -205,10 +205,17 @@ class Register(models.Model):
     Student_ID = models.CharField(max_length=255)
     Khmer_ID = models.CharField(max_length=255)
     Submit_Date = models.DateTimeField(auto_now_add=True)
-    Status = models.CharField(Status, max_length=10)
-    Decided_By = models.CharField(max_length=30, null=True)
-    Decided_Date = models.DateTimeField()
-    Reason = models.TextField(null=True)
+    Status = models.ForeignKey(Status, on_delete=models.CASCADE, max_length=10)
+    Decided_By = models.CharField(max_length=30, blank=True, null=True)
+    Decided_Date = models.DateTimeField(blank=True, null=True)
+    Reason = models.TextField(blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.Ref:  # Check if Ref is not already set
+            apply_for_code = self.Apply_For.code[:3].upper()  # Get first three letters of Apply_For code
+            current_datetime = timezone.now().strftime('%Y%m%d%H%M%S')  # Get current date and timestamp
+            self.Ref = apply_for_code + current_datetime
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"ID: {self.id}, Ref: {self.Ref}, Ref: {self.Last_Name_En} {self.First_Name_En}, Ref: {self.Major}"

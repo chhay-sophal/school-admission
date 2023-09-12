@@ -8,10 +8,12 @@
     src: url('/static/fonts/Krasar.ttf');
 }
 
-:root{
+:root {
+    --primary-op: #0187906c;
     --primary: #018690;
     --dark: #006b73;
-    --white: #ffffff;
+    --white: #fff;
+    --gold: rgb(255, 217, 0);
 }
 
 * {

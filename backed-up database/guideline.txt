@@ -1,0 +1,1 @@
+Copy folder "db_schooladmission"  to => C:\xampp\mysql\data

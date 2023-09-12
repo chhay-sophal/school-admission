@@ -14,11 +14,11 @@ $(document).ready(function () {
         $(this).addClass("active");
     });
 
-    $("#editForm").hide();
-    $("#btnSubmitEdit").addClass("disabled");
+    $("#updateProForm").hide();
+    // $("#btnSubmitEdit").addClass("disabled");
 
     function divUpdateProfile() {
-        $("#editForm").toggle();
+        $("#updateProForm").toggle();
         var buttonText = $("#btnEdit").text();
         $("#btnEdit").text(buttonText === "Edit" ? "Cancel" : "Edit");
     }
@@ -32,4 +32,6 @@ $(document).ready(function () {
     $("#ckbxConfirm").click(function () {
         $("#btnSubmitEdit").toggleClass("disabled");
     });
+
+    
 });

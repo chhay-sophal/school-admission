@@ -7,7 +7,6 @@ SECRET_KEY = 'django-insecure-xpo79z3)y+ie9(9#71(&!5ej=hd4eg*v43+gkcspqrf_z)3+br
 DEBUG = True
 ALLOWED_HOSTS = []
 
-
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -64,14 +63,11 @@ DATABASES = {
         "PASSWORD": "",
         "HOST": "127.0.0.1",
         "PORT": "3306",
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+        }
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -97,8 +93,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # For admin dashboard
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] # For load css and js
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # For admin dashboard
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]  # For load css and js
 STATIC_URL = 'static/'
 
 LOGIN_REDIRECT_URL = '/dashboard/'

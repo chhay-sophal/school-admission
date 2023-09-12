@@ -1,0 +1,113 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load static %}
+
+{% block contents %}
+<style>
+    .content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 75vh;
+    }
+
+    small {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+</style>
+
+<div class="h-screen flex-grow-1 overflow-y-lg-auto section">
+    <!-- Header -->
+    <header class="bg-surface-primary border-bottom pt-6 sticky-top shadow-sm p-3 mb-5 bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="mb-npx">
+                <div class="row align-items-center">
+                    <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                        <!-- Title -->
+                        <h1 class="h2 mb-0 ls-tight">{{title}}</h1>
+                    </div>
+                    <!-- Actions -->
+                    <div class="col-sm-6 col-12 text-sm-end">
+                        <div class="mx-n1">
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal Create User -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create User</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form name="createForm" id="createForm" method="POST" enctype="multipart/form-data">
+                                    <div class="mb-5 d-flex justify-content-center">
+                                        <input class="form-control" type="file" id="createProfile" name="createProfile" accept="image/jpg, image/jpeg, image/png" required />
+                                        <label id="createAvatar" for="createProfile" class="form-label"></label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input name="createUsername" type="text" class="form-control shadow-none" id="createUsername" placeholder="Enter Username" required />
+                                        <label for="createUsername">Username</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input name="createPassword" type="password" class="form-control shadow-none" id="createPassword" placeholder="Enter Password" required />
+                                        <label for="createPassword">Password</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input name="createEmail" type="email" class="form-control shadow-none" id="createEmail" placeholder="Enter Email" required />
+                                        <label for="createEmail">Email</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select name="createRole" class="form-select shadow-none" id="createRole" aria-label="Floating label select example" required />
+                                        <option value="" selected>---</option>
+                                        <option value="2">Admin</option>
+                                        </select>
+                                        <label for="createRole">Role</label>
+                                    </div>
+                                    <div class="form-floating">
+                                        <select name="createStatus" class="form-select shadow-none" id="createStatus" aria-label="Floating label select example" required />
+                                        <option value="" selected>---</option>
+                                        <option value="1">Active</option>
+                                        <option value="2">Inactive</option>
+                                        </select>
+                                        <label for="createStatus">Status</label>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" id="btnAddUser" name="btnAddUser" class="btn btn-primary">Create</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav -->
+                <ul class="nav nav-tabs mt-4 overflow-x border-0">
+                    <li class="nav-item">
+                        <a href="#tab1" class="nav-link nav-link-tabs active">Confirmation</a>
+                    </li>
+                </ul>
+            </div>
+    </header>
+    <div class="tab-content">
+        <div id="tab1" class="tab-pane active">
+            <div class="contents position-relative">
+                <div class="content">
+                    <img alt="..." src="{{ user.profile.image.url }}" class="avatar rounded-circle me-2" style="width: 100px; height: 100px;">
+                    <h2 class="mb-3">Delete Account</h2>
+                    <p>Are you sure you want to delete user <b>{{user.username}}</b> with ID <b>{{ user.id }}</b>?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <a href="{% url 'users' %}" class="btn btn-sm btn-primary mt-2"><i class="bi bi-box-arrow-left"></i> Back</a>
+                        <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
+                    </form>
+                    <small><span class="text-danger">NOTE:</span> After deleted, this user account can't login to admin site anymore.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents%}

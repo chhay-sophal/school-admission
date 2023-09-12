@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -39,8 +40,8 @@
             </div>
         </div>
 
-        <h2 class="text-uppercase text-center">application form admission</h2>
-        <form action="register_process.php" method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="col-md-12 mb-2">
                 <hr style="width: 100%;">
             </div>

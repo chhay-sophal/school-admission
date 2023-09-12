@@ -6,6 +6,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', DashboardView.as_view(), name="dashboard"),
     path('users', UsersView.as_view(), name="users"),
+    path('user/add', AddUserView.as_view(), name="user_add"),
+    path('user/delete/<int:pk>', DeleteUserView.as_view(), name="user_delete"),
     path('admission', AdmissionView.as_view(), name="admission"),
     path('curriculum', CurriculumView.as_view(), name="curriculum"),
     path('profile', ProfileView.as_view(), name="profile"),

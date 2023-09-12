@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect
 from datetime import datetime, date, time
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
+from . forms import *
 
 class IndexView(View):
     template_name = 'index/index.html'
@@ -35,6 +36,17 @@ class IndexView(View):
 
 
 class RegisterView(View):
+    def get_current_batch(self):
+        current_year = timezone.now().year
+        expired = Expired.objects.filter(year=current_year).first()
+        if expired:
+            return expired.batch
+        return None
+
+    @property
+    def batch(self):
+        return self.get_current_batch()
+    
     def get(self, request, *args, **kwargs):
         register_form = FormReg.objects.first()
 
@@ -60,6 +72,7 @@ class RegisterView(View):
             
         context = {
             'title': "Register",
+            'forms': RegisterForm(),
             'sex': Sex.objects.all(),
             'marital': Married.objects.all(),
             'relation': Relationship.objects.all(),
@@ -69,8 +82,49 @@ class RegisterView(View):
             'payment': Payment.objects.all(),
             'expired': expired_data,
         }
+    
+        print(self.get_current_batch())
 
         return render(request, template_name, context)
+    
+    def post(self, request):
+        form = RegisterForm(request.POST)
+
+        expired_data = Expired.objects.filter(year=datetime.now().year)
+
+        if expired_data.exists():
+            for data in expired_data:
+                expired_date = data.expired_date
+
+            expiration_datetime = datetime.combine(expired_date, time())
+            current_datetime = datetime.now()
+
+            expiration_timestamp = expiration_datetime.timestamp()
+            current_timestamp = current_datetime.timestamp()
+
+            if current_timestamp > expiration_timestamp:
+                return redirect('expiredPage')
+
+        context = {
+            'title': "Register",
+            'forms': RegisterForm(),
+            'sex': Sex.objects.all(),
+            'marital': Married.objects.all(),
+            'relation': Relationship.objects.all(),
+            'level': Level.objects.all(),
+            'major': Major.objects.all(),
+            'shift': Shift.objects.all(),
+            'payment': Payment.objects.all(),
+            'expired': expired_data,
+            'form': form
+        }
+
+        if form.is_valid():
+            form.save()
+            return redirect('expiredPage')
+        else:
+            print(form)
+            return render(request, "index/register.html", context)
     
 class ExpiredView(View):
     template_name = 'index/expired.html'
@@ -95,7 +149,7 @@ class ExpiredView(View):
 
         return render(request, self.template_name, context)
     
-class AdmissionView(View):
+class MyAdmissionView(View):
     template_name = 'index/admission.html'
 
     def get(self, request, *args, **kwargs):
