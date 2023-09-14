@@ -222,27 +222,51 @@ class AddSettingsView(LoginRequiredMixin, View):
         }
         return render(request, template_name, context)
 
-    def post(self, request):
-        template_name = 'dashboard/users.html'
-        user_form = UserForm(request.POST)
-        profile_form = ProfileForm(request.POST, request.FILES)
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user.password)
-            user.save()
+    def post(self, request, tab):
+        template_name = 'dashboard/settings_add.html'
+        form = None
+        tab = tab
+        if tab == 'contact':
+            form = ContactForm(request.POST)
+            subtitle = 'Contact'
+        elif tab == 'department':
+            form = DepartmentForm(request.POST)
+            subtitle = 'Department'
+        elif tab == 'expired':
+            form = ExpiredForm(request.POST)
+            subtitle = 'Expired'
+        elif tab == 'level':
+            form = LevelForm(request.POST)
+            subtitle = 'Level'
+        elif tab == 'major':
+            form = MajorForm(request.POST)
+            subtitle = 'Major'
+        elif tab == 'payment':
+            form = PaymentForm(request.POST)
+            subtitle = 'Payment'
+        elif tab == 'rating':
+            form = RatingForm(request.POST)
+            subtitle = 'Rating'
+        elif tab == 'shift':
+            form = ShiftForm(request.POST)
+            subtitle = 'Shift'
+        elif tab == 'tuitionfee':
+            form = TuitionFeeForm(request.POST)
+            subtitle = 'TuitionFee'
 
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
-            return redirect('users')
+        # user_form = UserForm(request.POST)
+        # profile_form = ProfileForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+
+            return redirect('setting')
         else:
-            user_form = UserForm()
-            profile_form = ProfileForm()
-
-            print(profile_form.errors)
+            print(form.errors)
 
             context = {
-                'profile_form': profile_form,
-                'user_form': user_form,
+                'form': form,
+                'subtitile': subtitle,
             }
             return render(request, template_name, context)
