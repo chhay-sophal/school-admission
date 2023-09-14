@@ -270,3 +270,42 @@ class AddSettingsView(LoginRequiredMixin, View):
                 'subtitile': subtitle,
             }
             return render(request, template_name, context)
+
+class DeleteSettingsView(LoginRequiredMixin, DeleteView):
+    model_map = {
+        'contact': Contact,
+        'department': Department,
+        'expired': Expired,
+        'level': Level,
+        'major': Major,
+        'payment': Payment,
+        'rating': Ratings,
+        'shift': Shift,
+        'tuitionfee': TuitionFee,
+    }
+    success_url = reverse_lazy('setting')
+    template_name = 'dashboard/settings_delete.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subtitle'] = self.get_subtitle()
+        return context
+    
+    def get_subtitle(self):
+        model = self.get_object()
+        return model._meta.verbose_name.capitalize() if model else ''
+
+    def get_object(self):
+        tab = self.kwargs['tab']
+        pk = self.kwargs['pk']
+        model = self.model_map.get(tab)
+        if model:
+            return model.objects.get(pk=pk)
+        return None
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object:
+            self.object.delete()
+        return redirect(self.get_success_url())
+    

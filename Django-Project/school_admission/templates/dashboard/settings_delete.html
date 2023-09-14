@@ -1,0 +1,47 @@
+{% extends 'dashboard/dashboard.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block contents %}
+<div class="h-screen flex-grow-1 overflow-y-lg-auto section">
+    <!-- Header -->
+    <header class="bg-surface-primary border-bottom pt-6 sticky-top shadow-sm p-3 mb-5 bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="mb-npx">
+                <div class="row align-items-center">
+                    <div class="col-sm-6 col-12 mb-4 mb-sm-0">
+                        <!-- Title -->
+                        <h1 class="h2 mb-0 ls-tight">Delete {{ subtitle }}</h1>
+                    </div>
+                    <!-- Actions -->
+                    <div class="col-sm-6 col-12 text-sm-end">
+                        <div class="mx-n1">
+                            <a href="{% url 'setting' %}" class="btn d-inline-flex btn-sm btn-primary mx-1">
+                                <span class=" pe-2">
+                                    <i class="fa-solid fa-arrow-left"></i>                                
+                                </span>
+                                <span>Back</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+    <div class="tab-content">
+        <div id="tab1" class="tab-pane active">
+            <div class="row">
+                <div class="col-6 mx-auto my-5">
+                    <h2 class="mb-3">Attention!</h2>
+                    <h3 class="mb-3">Are you sure that you want to delete {{ subtitle }}?</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        <a href="{% url 'setting' %}" class="btn btn-sm btn-primary mt-2"><i class="bi bi-box-arrow-left"></i> Back</a>
+                        <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
+                    </form>
+                    <h5 class="my-2"><span class="text-danger">NOTE:</span> After deleted, this user account can't login to admin site anymore.</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock contents%}
