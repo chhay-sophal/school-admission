@@ -170,5 +170,6 @@ class SettingView(LoginRequiredMixin, View):
             'contacts': Contact.objects.all(),
             'departments': Department.objects.all(),
             'expireds': Expired.objects.all(),
+            'levels': Level.objects.all(),
         }
         return render(request, template_name, context)
