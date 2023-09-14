@@ -167,5 +167,6 @@ class SettingView(LoginRequiredMixin, View):
         template_name = 'dashboard/setting.html'
         context = {
             'title': "Setting",
+            'contacts': Contact.objects.all(),
         }
         return render(request, template_name, context)
