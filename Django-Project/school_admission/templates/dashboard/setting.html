@@ -149,6 +149,7 @@
                             <th class="text-center text-white" scope="col">No</th>
                             <th class="text-white" scope="col">Title</th>
                             <th class="text-white" scope="col">Icon</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,6 +161,12 @@
                             </td>
                             <td data-label="Icon">
                                 <i class="{{ department.icon }}"></i>
+                            </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -191,6 +198,7 @@
                             <th class="text-white" scope="col">Start Date</th>
                             <th class="text-white" scope="col">Expire Date</th>
                             <th class="text-white" scope="col">Start Class</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -211,6 +219,12 @@
                             </td>
                             <td data-label="Start Class">
                                 <p>{{ expired.start_class }}</p>
+                            </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -238,6 +252,7 @@
                         <tr>
                             <th class="text-center text-white" scope="col">No</th>
                             <th class="text-white" scope="col">Title</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -246,6 +261,12 @@
                             <td class="text-center" data-label="No">{{ forloop.counter }}</td>
                             <td data-label="Title">
                                 <p>{{ level.title }}</p>
+                            </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -275,6 +296,7 @@
                             <th class="text-white" scope="col">Title</th>
                             <th class="text-white" scope="col">Department</th>
                             <th class="text-white" scope="col">Description</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -289,6 +311,12 @@
                             </td>
                             <td data-label="Description">
                                 <p>{{ major.description }}</p>
+                            </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -316,6 +344,7 @@
                         <tr>
                             <th class="text-center text-white" scope="col">No</th>
                             <th class="text-white" scope="col">Title</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -324,6 +353,12 @@
                             <td class="text-center" data-label="No">{{ forloop.counter }}</td>
                             <td data-label="Title">
                                 <p class="text-heading font-semibold">{{ payment.title }}</p>
+                            </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -355,6 +390,7 @@
                             <th class="text-white" scope="col">Comment</th>
                             <th class="text-white" scope="col">Created At</th>
                             <th class="text-white" scope="col">Status</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -375,6 +411,12 @@
                             </td>
                             <td data-label="Status">
                                 <p class="text-heading font-semibold">{{ ratings.status }}</p>
+                            </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -402,6 +444,7 @@
                         <tr>
                             <th class="text-center text-white" scope="col">No</th>
                             <th class="text-white" scope="col">Title</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -410,6 +453,12 @@
                             <td class="text-center" data-label="No">{{ forloop.counter }}</td>
                             <td data-label="Title">
                                 <p class="text-heading font-semibold">{{ shift.title }}</p>
+                            </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -439,6 +488,7 @@
                             <th class="text-white" scope="col">Level</th>
                             <th class="text-white" scope="col">Price</th>
                             <th class="text-white" scope="col">Description</th>
+                            <th class="text-white" scope="col">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -454,6 +504,11 @@
                             <td data-label="Description">
                                 <p class="text-heading font-semibold">{{ tuitionfee.description }}</p>
                             </td>
+                            <td data-label="Actions" class="">
+                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         {% endfor %}
