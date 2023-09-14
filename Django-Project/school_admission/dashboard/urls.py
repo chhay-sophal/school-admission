@@ -11,5 +11,6 @@ urlpatterns = [
     path('admission', AdmissionView.as_view(), name="admission"),
     path('curriculum', CurriculumView.as_view(), name="curriculum"),
     path('profile', ProfileView.as_view(), name="profile"),
-    path('setting', SettingView.as_view(), name="setting"),
+    path('settings', SettingView.as_view(), name="setting"),
+    path('settings/add/<str:tab>/', AddSettingsView.as_view(), name="settings_add"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

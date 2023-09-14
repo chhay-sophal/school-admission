@@ -178,3 +178,71 @@ class SettingView(LoginRequiredMixin, View):
             'tuitionfees': TuitionFee.objects.all(),
         }
         return render(request, template_name, context)
+
+class AddSettingsView(LoginRequiredMixin, View):
+    login_url = 'login'
+    redirect_field_name = 'redirect_to'
+
+    def get(self, request, tab):
+        template_name = 'dashboard/settings_add.html'
+        form = None
+        tab = tab
+        if tab == 'contact':
+            form = ContactForm()
+            subtitle = 'Contact'
+        elif tab == 'department':
+            form = DepartmentForm()
+            subtitle = 'Department'
+        elif tab == 'expired':
+            form = ExpiredForm()
+            subtitle = 'Expired'
+        elif tab == 'level':
+            form = LevelForm()
+            subtitle = 'Level'
+        elif tab == 'major':
+            form = MajorForm()
+            subtitle = 'Major'
+        elif tab == 'payment':
+            form = PaymentForm()
+            subtitle = 'Payment'
+        elif tab == 'rating':
+            form = RatingForm()
+            subtitle = 'Rating'
+        elif tab == 'shift':
+            form = ShiftForm()
+            subtitle = 'Shift'
+        elif tab == 'tuitionfee':
+            form = TuitionFeeForm()
+            subtitle = 'TuitionFee'
+
+        print(tab)
+        context = {
+            'form': form,
+            'subtitle': subtitle,
+        }
+        return render(request, template_name, context)
+
+    def post(self, request):
+        template_name = 'dashboard/users.html'
+        user_form = UserForm(request.POST)
+        profile_form = ProfileForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save(commit=False)
+            user.set_password(user.password)
+            user.save()
+
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            return redirect('users')
+        else:
+            user_form = UserForm()
+            profile_form = ProfileForm()
+
+            print(profile_form.errors)
+
+            context = {
+                'profile_form': profile_form,
+                'user_form': user_form,
+            }
+            return render(request, template_name, context)
