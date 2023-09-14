@@ -172,5 +172,6 @@ class SettingView(LoginRequiredMixin, View):
             'expireds': Expired.objects.all(),
             'levels': Level.objects.all(),
             'majors': Major.objects.all(),
+            'payments': Payment.objects.all(),
         }
         return render(request, template_name, context)
