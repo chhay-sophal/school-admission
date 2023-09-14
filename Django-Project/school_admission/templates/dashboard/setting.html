@@ -114,7 +114,9 @@
                                 <a class="">{{ contact.text }}</a>
                             </td>
                             <td data-label="Link">
-                                <a class="" href="{{ contact.link }}" target="_blank">{{ contact.link }}</a>
+                                <a class="" href="{{ contact.link }}" target="_blank">
+                                    {{ contact.link|truncatechars:30 }}
+                                </a>
                             </td>
                             <td data-label="Actions" class="">
                                 <a href="#" class="btn btn-sm btn-neutral">Edit</a>
