@@ -168,5 +168,6 @@ class SettingView(LoginRequiredMixin, View):
         context = {
             'title': "Setting",
             'contacts': Contact.objects.all(),
+            'departments': Department.objects.all(),
         }
         return render(request, template_name, context)

@@ -40,7 +40,7 @@
                     <a href="#tab-contact" class="nav-link nav-link-tabs active">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#tab2" class="nav-link nav-link-tabs">tab 2</a>
+                    <a href="#tab-department" class="nav-link nav-link-tabs">Department</a>
                 </li>
                 <li class="nav-item">
                     <a href="#tab3" class="nav-link nav-link-tabs">tab 3</a>
@@ -93,50 +93,27 @@
             </div>
         </div>
     </div>
-    <div id="tab2" class="tab-pane">
+    <div id="tab-department" class="tab-pane">
         <div class="container my-4">
             <div class="table-responsive">
                 <table id="tblUsers" class="table table-hover table-nowrap">
                     <thead class="table-header" style="background-color: #018690;">
                         <tr>
                             <th class="text-center text-white" scope="col">No</th>
-                            <th class="text-white" scope="col">firstname</th>
-                            <th class="text-white" scope="col">Full Name</th>
-                            <th class="text-white" scope="col">Email</th>
-                            <th class="text-white" scope="col">Role</th>
-                            <th class="text-white" scope="col">Active</th>
-                            <th class="text-white" scope="col">Staff</th>
-                            <th class="text-white" scope="col">Actions</th>
+                            <th class="text-white" scope="col">Icon</th>
+                            <th class="text-white" scope="col">Title</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for user in users %}
+                        {% for department in departments %}
                         <tr>
                             <td class="text-center" data-label="No">{{ forloop.counter }}</td>
-                            <td data-label="Username">
-                                <img alt="..." src="{{ user.profile.image.url }}" class="avatar avatar-sm rounded-circle me-2">
-                                <a class="text-heading font-semibold" href="#">{{ user.username }}</a>
+                            <td data-label="Title">
+                                <a class="text-heading font-semibold">{{ department.title }}</a>
                             </td>
-                            <td data-label="Full Name">
-                                <span>{{user.first_name}} {{user.last_name}}</span>
-                            </td>
-                            <td data-label="Email">
-                                <a class="text-current" href="mailto:{{ user.email }}">{{ user.email }}</a>
-                            </td>
-                            <td data-label="Role">
-                                <a class="badge bg-opacity-30 bg-success text-white" href="#">{{ user.profile.role }}</a>
-                            </td>
-                            <td data-label="Active">
-                                <a class="text-current" href="#">{{ user.is_active }}</a>
-                            </td>
-                            <td data-label="Staff">
-                                <a class="text-current" href="#">{{ user.is_staff }}</a>
-                            </td>
-                            <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
-                                <a href="{% url 'user_delete' user.id %}" class="btn btn-sm btn-square btn-danger">
-                                    <i class="bi bi-trash"></i>
-                                </a>
+                            <td data-label="Icon">
+                                <img alt="..." src="{{ department.icon.url }}" class="avatar avatar-sm rounded-circle me-2">
+                                <a class="text-heading font-semibold">{{ department.icon }}</a>
                             </td>
                         </tr>
                         {% endfor %}
