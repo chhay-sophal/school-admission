@@ -173,5 +173,6 @@ class SettingView(LoginRequiredMixin, View):
             'levels': Level.objects.all(),
             'majors': Major.objects.all(),
             'payments': Payment.objects.all(),
+            'ratingss': Ratings.objects.all(),
         }
         return render(request, template_name, context)
