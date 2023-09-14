@@ -167,7 +167,7 @@ class SettingView(LoginRequiredMixin, View):
         template_name = 'dashboard/setting.html'
         context = {
             'title': "Setting",
-            'contacts': Contact.objects.all(),
+            'contacts': Contact.objects.exclude(id=1),
             'departments': Department.objects.all(),
             'expireds': Expired.objects.all(),
             'levels': Level.objects.all(),
