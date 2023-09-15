@@ -17,10 +17,39 @@ class DashboardView(LoginRequiredMixin, View):
 
     def get(self, request):
         template_name = 'dashboard/overview.html'
+
+        # Get all applications
+        applications = Register.objects.all()
+
+        # Filter applications
+        pending_applications = applications.filter(Status__title='Pending')
+        admitted_applications = applications.filter(Status__title='Admitted')
+        denied_applications = applications.filter(Status__title='Denied')
+
+        # Get all users
+        users = User.objects.all()
+
+        # Get all ratings
+        ratings = Ratings.objects.all()
+
+        # Calculate counts for each rating
+        rating_counts = {}
+        for rating in ratings:
+            rating_counts[rating.rating] = ratings.filter(rating=rating.rating).count()
+
         context = {
             'title': 'Dashboard',
             'school_info': Contact.objects.first(),
             'current_year': datetime.now().year,
+            'applications': Register.objects.all(),
+            'total_applications': applications.count(),
+            'total_pending_applications': pending_applications.count(),
+            'total_admitted_applications': admitted_applications.count(),
+            'total_denied_applications': denied_applications.count(),
+            'total_reviewed_applications': admitted_applications.count() + denied_applications.count(),
+            'total_users': users.count(),
+            'total_ratings': ratings.count(),
+            'rating_counts': rating_counts,
         }
         return render(request, template_name, context)
 
