@@ -32,13 +32,13 @@
             <div class="row">
                 <div class="col-6 mx-auto my-5">
                     <h2 class="mb-3">Attention!</h2>
-                    <h3 class="mb-3">Are you sure that you want to delete {{ subtitle }}?</h3>
+                    <h3 class="mb-3">Are you sure that you want to delete this {{ subtitle }}?</h3>
                     <form method="post">
                         {% csrf_token %}
                         <a href="{% url 'setting' %}" class="btn btn-sm btn-primary mt-2"><i class="bi bi-box-arrow-left"></i> Back</a>
                         <button type="submit" class="btn btn-sm btn-danger mt-2">Delete</button>
                     </form>
-                    <h5 class="my-2"><span class="text-danger">NOTE:</span> After deleted, this user account can't login to admin site anymore.</h5>
+                    <h5 class="my-2"><span class="text-danger">NOTE:</span> Once deleted, this data can't be restored.</h5>
                 </div>
             </div>
         </div>
