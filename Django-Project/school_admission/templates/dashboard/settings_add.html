@@ -36,9 +36,6 @@
                         {% csrf_token %}
                         {{ form|crispy }}
                         <div class="row">
-                            <!-- <div class="col-6"> 
-                                <a class="btn btn-danger form-control" href="{% url 'setting' %}">Back</a>
-                            </div> -->
                             <div class="col-12 mt-4"> 
                                 <button type="submit" class="btn btn-primary form-control">Add {{ subtitle }}</button>
                             </div>
