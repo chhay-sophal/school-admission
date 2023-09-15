@@ -31,7 +31,7 @@
         <div id="tab1" class="tab-pane active">
             <div class="row">
                 <div class="col-6 mx-auto my-5">
-                    <h2>Add {{ subtitle }}</h2>
+                    <h2>Modify {{ subtitle }}</h2>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
