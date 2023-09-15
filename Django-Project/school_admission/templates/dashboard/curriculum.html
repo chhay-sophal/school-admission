@@ -2,6 +2,12 @@
 {% load static %}
 
 {% block contents %}
+<style>
+    .pagination .active a {
+        background-color: #018690 !important;
+        color: #fff !important;
+    }
+</style>
 <!-- Header -->
 <header class="bg-surface-primary border-bottom pt-6 sticky-top shadow-sm p-3 mb-5 bg-body-tertiary">
     <div class="container-fluid">
@@ -27,13 +33,13 @@
             <!-- Nav -->
             <ul class="nav nav-tabs mt-4 overflow-x border-0">
                 <li class="nav-item">
-                    <a href="#tab1" class="nav-link nav-link-tabs active">tab 1</a>
+                    <a href="#tabAssociateDegree" class="nav-link nav-link-tabs active">Associate's Degree</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#tab2" class="nav-link nav-link-tabs">tab 2</a>
+                    <a href="#tabBachelorDegree" class="nav-link nav-link-tabs">Bachelor's Degree</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#tab3" class="nav-link nav-link-tabs">tab 3</a>
+                    <a href="#tabMasterDegree" class="nav-link nav-link-tabs">Master's Degree</a>
                 </li>
             </ul>
         </div>
@@ -43,20 +49,119 @@
 <main class="py-6 bg-surface-secondary">
     <div class="container-fluid">
         <div class="row g-6 mb-6">
-            <div class="col-xl-3 col-sm-6 col-12">
+            <div class="col-xl-10 col-sm-10 col-12">
                 <div class="tab-content">
-                    <div id="tab1" class="tab-pane active">
-                        <!-- Content for tab 1 -->
+                    <!-- TAB ASSOCIATION DEGREE -->
+                    <div id="tabAssociateDegree" class="tab-pane active">
+                        <div class="container mb-5">
+                            <div class="table-responsive">
+                                <!-- Actions -->
+                                <table id="tblAssociateDegree" class="table table-hover table-nowrap">
+                                    <thead class="table-header" style="background-color: #018690;">
+                                        <tr>
+                                            <th class="text-center text-white" scope="col">No</th>
+                                            <th class="text-white" scope="col">Major</th>
+                                            <th class="text-white" scope="col">Department</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for major in majors %}
+                                        <tr>
+                                            <td class="text-center" data-label="No"> {{ forloop.counter }}</td>
+                                            <td data-label="Name">
+                                                <a class="text-heading font-semibold" href="https://www.acleda-aib.edu.kh/tc/eng/ap_curricula_bachelor_computer_science_and_engineering.pdf " target="_blank">{{ major.title }}</a>
+                                            </td>
+                                            <td data-label="Name">
+                                                <a class="text-heading font-semibold" href="#">{{ major.department }}</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div id="tab2" class="tab-pane">
-                        <!-- Content for tab 2 -->
+                    <!-- TAB MASTER DEGREE -->
+                    <div id="tabBachelorDegree" class="tab-pane">
+                        <div class="container mb-5">
+                            <div class="table-responsive">
+                                <!-- Actions -->
+                                <table id="tblBachelorDegree" class="table table-hover table-nowrap">
+                                    <thead class="table-header" style="background-color: #018690;">
+                                        <tr>
+                                            <th class="text-center text-white" scope="col">No</th>
+                                            <th class="text-white" scope="col">Major</th>
+                                            <th class="text-white" scope="col">Department</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for major in majors %}
+                                        <tr>
+                                            <td class="text-center" data-label="No">{{ forloop.counter }}</td>
+                                            <td data-label="Name">
+                                                <a class="text-heading font-semibold" href="https://www.acleda-aib.edu.kh/tc/eng/ap_curricula_bachelor_computer_science_and_engineering.pdf" target="_blank">{{ major.title }}</a>
+                                            </td>
+                                            <td data-label="Name">
+                                                <a class="text-heading font-semibold" >{{ major.department }}</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <div id="tab3" class="tab-pane">
-                        <!-- Content for tab 3 -->
+                    <!-- TAB MASTER DEGREE -->
+                    <div id="tabMasterDegree" class="tab-pane">
+                        <div class="container mb-5">
+                            <div class="table-responsive">
+                                <!-- Actions -->
+                                <table id="tblMasterDegree" class="table table-hover table-nowrap">
+                                    <thead class="table-header" style="background-color: #018690;">
+                                        <tr>
+                                            <th class="text-center text-white" scope="col">No</th>
+                                            <th class="text-white" scope="col">Major</th>
+                                            <th class="text-white" scope="col">Department</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for major in majors %}
+                                        <tr>
+                                            <td class="text-center" data-label="No">{{ forloop.counter }}</td>
+                                            <td data-label="Name">
+                                                <a class="text-heading font-semibold" href="https://www.acleda-aib.edu.kh/tc/eng/ap_curricula_bachelor_computer_science_and_engineering.pdf" target="_blank">{{ major.title }}</a>                                            
+                                            </td>
+                                            <td data-label="Name">
+                                                <a class="text-heading font-semibold" href="#">{{ major.department }}</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </div>           
             </div>
         </div>
     </div>
 </main>
+
+<script>
+    function initializeDataTable(tableId) {
+        $(tableId).DataTable({
+            searching: true,
+            ordering: true,
+            select: false,
+            paging: true,
+            "lengthMenu": [[5, 10, 30, -1], [5, 10, 30, "All"]]
+        });
+    }
+
+    $(document).ready(function () {
+        initializeDataTable("#tblAssociateDegree");
+        initializeDataTable("#tblBachelorDegree");
+        initializeDataTable("#tblMasterDegree");
+    });
+</script>
 {% endblock contents%}

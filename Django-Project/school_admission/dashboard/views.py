@@ -154,6 +154,8 @@ class CurriculumView(LoginRequiredMixin, View):
             'title': "Curriculum",
             'school_info': Contact.objects.first(),
             'current_year': datetime.now().year,
+            'departments': Department.objects.all(),
+            'majors': Major.objects.all(),
         }
         return render(request, template_name, context)
 
