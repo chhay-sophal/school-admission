@@ -29,6 +29,9 @@ class DashboardView(LoginRequiredMixin, View):
         # Get all users
         users = User.objects.all()
 
+        # Get all students
+        students = admitted_applications
+
         # Get all ratings
         ratings = Ratings.objects.all()
 
@@ -48,6 +51,7 @@ class DashboardView(LoginRequiredMixin, View):
             'total_denied_applications': denied_applications.count(),
             'total_reviewed_applications': admitted_applications.count() + denied_applications.count(),
             'total_users': users.count(),
+            'total_students': students.count(),
             'total_ratings': ratings.count(),
             'rating_counts': rating_counts,
         }
