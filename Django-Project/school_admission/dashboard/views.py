@@ -166,7 +166,7 @@ class SettingView(LoginRequiredMixin, View):
     def get(self, request):
         template_name = 'dashboard/setting.html'
         context = {
-            'title': "Setting",
+            'title': "Settings",
             'contacts': Contact.objects.exclude(id=1),
             'departments': Department.objects.all(),
             'expireds': Expired.objects.all(),
@@ -254,14 +254,11 @@ class AddSettingsView(LoginRequiredMixin, View):
             form = TuitionFeeForm(request.POST)
             subtitle = 'TuitionFee'
 
-        # user_form = UserForm(request.POST)
-        # profile_form = ProfileForm(request.POST, request.FILES)
-
         if form.is_valid():
             form = form.save(commit=False)
             form.save()
 
-            return redirect('setting')
+            return redirect('settings')
         else:
             print(form.errors)
 
@@ -283,7 +280,7 @@ class DeleteSettingsView(LoginRequiredMixin, DeleteView):
         'shift': Shift,
         'tuitionfee': TuitionFee,
     }
-    success_url = reverse_lazy('setting')
+    success_url = reverse_lazy('settings')
     template_name = 'dashboard/settings_delete.html'
     
     def get_context_data(self, **kwargs):
@@ -322,7 +319,7 @@ class ModifySettingsView(LoginRequiredMixin, UpdateView):
         'tuitionfee': TuitionFee,
     }
     template_name = 'dashboard/settings_modify.html'
-    success_url = reverse_lazy('setting')
+    success_url = reverse_lazy('settings')
     fields = '__all__'
 
     def get_object(self, queryset=None):
