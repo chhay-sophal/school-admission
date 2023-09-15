@@ -309,3 +309,35 @@ class DeleteSettingsView(LoginRequiredMixin, DeleteView):
             self.object.delete()
         return redirect(self.get_success_url())
     
+class ModifySettingsView(LoginRequiredMixin, UpdateView):
+    model_map = {
+        'contact': Contact,
+        'department': Department,
+        'expired': Expired,
+        'level': Level,
+        'major': Major,
+        'payment': Payment,
+        'rating': Ratings,
+        'shift': Shift,
+        'tuitionfee': TuitionFee,
+    }
+    template_name = 'dashboard/settings_modify.html'
+    success_url = reverse_lazy('setting')
+    fields = '__all__'
+
+    def get_object(self, queryset=None):
+        tab = self.kwargs['tab']
+        pk = self.kwargs['pk']
+        model = self.model_map.get(tab)
+        if model:
+            return model.objects.get(pk=pk)
+        return None
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subtitle'] = self.get_subtitle()
+        return context
+
+    def get_subtitle(self):
+        model = self.get_object()
+        return model._meta.verbose_name.capitalize() if model else ''   

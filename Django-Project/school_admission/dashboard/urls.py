@@ -14,4 +14,5 @@ urlpatterns = [
     path('settings', SettingView.as_view(), name="setting"),
     path('settings/add/<str:tab>/', AddSettingsView.as_view(), name="settings_add"),
     path('settings/delete/<str:tab>/<int:pk>/', DeleteSettingsView.as_view(), name='settings_delete'),
+    path('settings/modify/<str:tab>/<int:pk>/', ModifySettingsView.as_view(), name="settings_modify"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -110,7 +110,7 @@
                                 </a>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'contact' contact.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'contact' contact.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -156,7 +156,7 @@
                                 <i class="{{ department.icon }}"></i>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'department' department.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'department' department.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -214,7 +214,7 @@
                                 <p>{{ expired.start_class }}</p>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'expired' expired.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'expired' expired.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -256,7 +256,7 @@
                                 <p>{{ level.title }}</p>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'level' level.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'level' level.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -306,7 +306,7 @@
                                 <p>{{ major.description }}</p>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'major' major.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'major' major.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -348,7 +348,7 @@
                                 <p class="text-heading font-semibold">{{ payment.title }}</p>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'payment' payment.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'payment' payment.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -406,7 +406,7 @@
                                 <p class="text-heading font-semibold">{{ ratings.status }}</p>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'rating' ratings.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'rating' ratings.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -448,7 +448,7 @@
                                 <p class="text-heading font-semibold">{{ shift.title }}</p>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'shift' shift.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'shift' shift.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
@@ -498,7 +498,7 @@
                                 <p class="text-heading font-semibold">{{ tuitionfee.description }}</p>
                             </td>
                             <td data-label="Actions" class="">
-                                <a href="#" class="btn btn-sm btn-neutral">Edit</a>
+                                <a href="{% url 'settings_modify' 'tuitionfee' tuitionfee.id %}" class="btn btn-sm btn-neutral">Edit</a>
                                 <a href="{% url 'settings_delete' 'tuitionfee' tuitionfee.id %}" class="btn btn-sm btn-square btn-danger">
                                     <i class="bi bi-trash"></i>
                                 </a>
